@@ -214,7 +214,7 @@ export default function Features() {
       ),
       title: "Execution & Automation",
       description:
-        "Launch DCA strategies, token snipers and sentiment-based copying. Deploy pro-grade orders: trailing stops, bracket orders, TWAP, iceberg, OCO pairs. Everything executes atomically across chains while you focus on strategy.",
+        "Automate DCA, sniping and sentiment-based copying with pro tools: trailing stops, bracket orders, TWAP, iceberg and OCO. Tetra executes across chains instantly while you focus on winning trades.",
     },
   ];
 

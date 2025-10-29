@@ -62,7 +62,7 @@ export default function Ethos({
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.1 }}
               >
-                The Tetra Ethos
+                The Tetra Vision
               </motion.h2>
 
               <motion.div
@@ -78,12 +78,11 @@ export default function Ethos({
                   variants={itemVariants}
                   transition={{ duration: 0.5 }}
                 >
-                  We were tired of juggling five apps just to make one trade.
+                  Tetra collapses the fragmented trading stack into a single execution surface
                   <br />
-                  So we built Tetra - A terminal that unifies fragmented
-                  markets, simplifies
+                  spanning discovery, routing, analytics, and automation across all asset classes
                   <br />
-                  execution, and gives every trader the same tools as the pros.
+                    and chains.
                 </motion.p>
               </motion.div>
             </div>
