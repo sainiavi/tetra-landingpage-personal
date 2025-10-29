@@ -123,16 +123,15 @@ const FooterTop: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex flex-col space-y-2 items-end">
+        <div className="flex space-x-4 items-center">
           <a
             href="https://x.com/tetra_trade"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white text-xs sm:text-sm hover:text-[#98C500] transition-colors flex items-center gap-2"
+            className="text-white hover:text-[#98C500] transition-colors"
           >
-            Follow Twitter
             <svg
-              className="w-3 h-3 sm:w-4 sm:h-4"
+              className="w-5 h-5 sm:w-6 sm:h-6"
               viewBox="0 0 24 24"
               fill="currentColor"
             >
@@ -143,11 +142,10 @@ const FooterTop: React.FC = () => {
             href="https://discord.gg/aDwNR2YFRr"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white text-xs sm:text-sm hover:text-[#98C500] transition-colors flex items-center gap-2"
+            className="text-white hover:text-[#98C500] transition-colors"
           >
-            Join Discord
             <svg
-              className="w-3 h-3 sm:w-4 sm:h-4"
+              className="w-5 h-5 sm:w-6 sm:h-6"
               viewBox="0 0 24 24"
               fill="currentColor"
             >

@@ -13,22 +13,58 @@ interface WaitlistModalProps {
 const WaitlistModal: React.FC<WaitlistModalProps> = ({ isOpen, onClose }) => {
   const [telegramUsername, setTelegramUsername] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", { telegramUsername, walletAddress });
     
-    // Show toast notification
-    toast.success("You will be notified soon", {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
+    // Validate Telegram username is non-empty
+    if (!telegramUsername.trim()) {
+      toast.error("Telegram username is required");
+      return;
+    }
     
-    onClose();
+    // Google Apps Script URL
+    const googleAppScriptURL = 'https://script.google.com/macros/s/AKfycbxJw9DyPCLNl7xHOxntXdgE4mN-GF04dOJVLDcYvRD2I3mvoxgN0Ck_AKS6NKMORM4P/exec';
+    
+    const body = new FormData();
+    body.append("telegram", telegramUsername.trim());
+    body.append("address", walletAddress.trim());
+    
+    setIsSubmitting(true);
+    fetch(googleAppScriptURL, {
+      method: "POST",
+      mode: "no-cors",
+      body,
+    })
+      .then(() => {
+        toast.success("Joined waitlist successfully", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        
+        // Clear form and close modal
+        setTelegramUsername("");
+        setWalletAddress("");
+        onClose();
+      })
+      .catch(() => {
+        toast.error("Error: Could not submit. Please try again.", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
   return (
@@ -105,28 +141,25 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ isOpen, onClose }) => {
 
               <motion.button
                 type="submit"
-                className="w-full bg-[#7B9C09] text-white py-2.5 sm:py-3 px-4 rounded-lg font-medium hover:bg-[#6a8508] transition-colors text-sm sm:text-base"
+                className="w-full bg-[#7B9C09] text-white py-2.5 sm:py-3 px-4 rounded-lg font-medium hover:bg-[#6a8508] transition-colors text-sm sm:text-base disabled:opacity-70 disabled:cursor-not-allowed"
+                disabled={isSubmitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Secure my Spot
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V2a10 10 0 100 20v-2a8 8 0 01-8-8z"></path>
+                    </svg>
+                    Submitting...
+                  </span>
+                ) : (
+                  'Secure my Spot'
+                )}
               </motion.button>
             </form>
 
-            <div className="flex justify-center items-center gap-8 sm:gap-12 mt-6 sm:mt-8 pt-4 sm:pt-6">
-              <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-white">
-                  2,847
-                </div>
-                <div className="text-[#818670] text-xs sm:text-sm mt-1">ON WAITLIST</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-white">
-                  156
-                </div>
-                <div className="text-[#818670] text-xs sm:text-sm mt-1">JOINED TODAY</div>
-              </div>
-            </div>
           </motion.div>
         </motion.div>
       )}
