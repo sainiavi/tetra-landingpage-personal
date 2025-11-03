@@ -1,13 +1,15 @@
 "use client";
 
-import React from "react";
+import { type FC } from "react";
 import { motion } from "framer-motion";
 
-interface NavbarProps {
+type NavbarProps = {
   className?: string;
-}
+};
 
-const Navbar: React.FC<NavbarProps> = ({ className = "" }) => {
+const Navbar: FC<NavbarProps> = ({ className = "" }) => {
+  const buttonClassNames = "bg-black text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-md text-xs sm:text-sm font-medium flex items-center gap-1 sm:gap-2 border border-gray-300 hover:bg-gray-800 transition-colors";
+
   return (
     <nav className={`w-full absolute top-0 left-0 z-50 ${className}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
@@ -30,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ className = "" }) => {
               href="https://discord.gg/aDwNR2YFRr"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-black text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-md text-xs sm:text-sm font-medium flex items-center gap-1 sm:gap-2 border border-gray-300 hover:bg-gray-800 transition-colors"
+              className={buttonClassNames}
             >
               <span className="hidden sm:inline">Join</span>
               <span className="sm:hidden">Join</span>
@@ -46,7 +48,7 @@ const Navbar: React.FC<NavbarProps> = ({ className = "" }) => {
               href="https://x.com/tetra_trade"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-black text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-md text-xs sm:text-sm font-medium flex items-center gap-1 sm:gap-2 border border-gray-300 hover:bg-gray-800 transition-colors"
+              className={buttonClassNames}
             >
               <span className="hidden sm:inline">Follow on</span>
               <span className="sm:hidden">Follow</span>

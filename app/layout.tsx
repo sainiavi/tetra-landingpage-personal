@@ -9,21 +9,6 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Tetra',
   description: 'Redefining how global markets trade on-chain',
-  icons: {
-    icon: [
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-      {
-        url: '/icon.svg',
-        sizes: 'any',
-        type: 'image/svg+xml',
-      },
-    ],
-    shortcut: '/icon.svg',
-    apple: '/icon.svg',
-  },
 }
 
 export default function RootLayout({
