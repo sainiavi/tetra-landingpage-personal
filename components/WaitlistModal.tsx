@@ -1,41 +1,39 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState, type FC, type FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { toast } from "react-toastify";
 
-interface WaitlistModalProps {
+type WaitlistModalProps = {
   isOpen: boolean;
   onClose: () => void;
-}
+};
 
-const WaitlistModal: React.FC<WaitlistModalProps> = ({ isOpen, onClose }) => {
-  const [telegramUsername, setTelegramUsername] = useState("");
-  const [walletAddress, setWalletAddress] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+const WaitlistModal: FC<WaitlistModalProps> = ({ isOpen, onClose }) => {
+  const [userHandle, setUserHandle] = useState("");
+  const [addressValue, setAddressValue] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
     
-    // Validate Telegram username is non-empty
-    if (!telegramUsername.trim()) {
+    if (!userHandle.trim()) {
       toast.error("Telegram username is required");
       return;
     }
     
-    // Google Apps Script URL
-    const googleAppScriptURL = 'https://script.google.com/macros/s/AKfycbxJw9DyPCLNl7xHOxntXdgE4mN-GF04dOJVLDcYvRD2I3mvoxgN0Ck_AKS6NKMORM4P/exec';
+    const apiEndpoint = 'https://script.google.com/macros/s/AKfycbxJw9DyPCLNl7xHOxntXdgE4mN-GF04dOJVLDcYvRD2I3mvoxgN0Ck_AKS6NKMORM4P/exec';
     
-    const body = new FormData();
-    body.append("telegram", telegramUsername.trim());
-    body.append("address", walletAddress.trim());
+    const requestPayload = new FormData();
+    requestPayload.append("telegram", userHandle.trim());
+    requestPayload.append("address", addressValue.trim());
     
-    setIsSubmitting(true);
-    fetch(googleAppScriptURL, {
+    setIsProcessing(true);
+    fetch(apiEndpoint, {
       method: "POST",
       mode: "no-cors",
-      body,
+      body: requestPayload,
     })
       .then(() => {
         toast.success("Joined waitlist successfully", {
@@ -47,9 +45,8 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ isOpen, onClose }) => {
           draggable: true,
         });
         
-        // Clear form and close modal
-        setTelegramUsername("");
-        setWalletAddress("");
+        setUserHandle("");
+        setAddressValue("");
         onClose();
       })
       .catch(() => {
@@ -63,7 +60,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ isOpen, onClose }) => {
         });
       })
       .finally(() => {
-        setIsSubmitting(false);
+        setIsProcessing(false);
       });
   };
 
@@ -114,13 +111,13 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ isOpen, onClose }) => {
               platform. Secure your spot today.
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+            <form onSubmit={handleFormSubmit} className="space-y-3 sm:space-y-4">
               <div>
                 <input
                   type="text"
                   placeholder="Telegram username"
-                  value={telegramUsername}
-                  onChange={(e) => setTelegramUsername(e.target.value)}
+                  value={userHandle}
+                  onChange={(e) => setUserHandle(e.target.value)}
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-transparent border border-white/20 rounded-lg text-white placeholder-white/50 focus:border-[#818670] focus:outline-none transition-colors text-sm sm:text-base"
                   required
                 />
@@ -130,8 +127,8 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ isOpen, onClose }) => {
                 <input
                   type="text"
                   placeholder="EVM or SOL address"
-                  value={walletAddress}
-                  onChange={(e) => setWalletAddress(e.target.value)}
+                  value={addressValue}
+                  onChange={(e) => setAddressValue(e.target.value)}
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-16 sm:pr-20 bg-transparent border border-white/20 rounded-lg text-white placeholder-white/50 focus:border-[#7B9C09] focus:outline-none transition-colors text-sm sm:text-base"
                 />
                 <span className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 text-[#7B9C09] text-xs pointer-events-none">
@@ -142,11 +139,11 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ isOpen, onClose }) => {
               <motion.button
                 type="submit"
                 className="w-full bg-[#7B9C09] text-white py-2.5 sm:py-3 px-4 rounded-lg font-medium hover:bg-[#6a8508] transition-colors text-sm sm:text-base disabled:opacity-70 disabled:cursor-not-allowed"
-                disabled={isSubmitting}
+                disabled={isProcessing}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {isSubmitting ? (
+                {isProcessing ? (
                   <span className="flex items-center justify-center gap-2">
                     <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

@@ -1,14 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { type FC } from "react";
 import JoinWaitlistButton from "./JoinWaitlistButton";
 
-export default function Ethos({
-  onJoinWaitlist,
-}: {
+type VisionSectionProps = {
   onJoinWaitlist: () => void;
-}) {
-  const itemVariants = {
+};
+
+const VisionSection: FC<VisionSectionProps> = ({ onJoinWaitlist }) => {
+  const paragraphMotion = {
     hidden: {
       opacity: 0,
       y: 80,
@@ -22,7 +23,7 @@ export default function Ethos({
     },
   };
 
-  const textVariants = {
+  const headingMotion = {
     hidden: { opacity: 0, y: 60 },
     visible: {
       opacity: 1,
@@ -34,7 +35,7 @@ export default function Ethos({
     },
   };
 
-  const buttonVariants = {
+  const ctaMotion = {
     hidden: {
       opacity: 0,
       y: 100,
@@ -49,6 +50,8 @@ export default function Ethos({
     },
   };
 
+  const viewportConfig = { once: true, amount: 0.1 };
+
   return (
     <div className="relative w-full py-8 sm:py-10 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
@@ -57,25 +60,25 @@ export default function Ethos({
             <div className="flex-1">
               <motion.h2
                 className="text-lg sm:text-xl text-[#98C500] mb-4 sm:mb-6"
-                variants={textVariants}
+                variants={headingMotion}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
+                viewport={viewportConfig}
               >
                 The Tetra Vision
               </motion.h2>
 
               <motion.div
                 className="space-y-4 sm:space-y-6 text-white"
-                variants={textVariants}
+                variants={headingMotion}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
+                viewport={viewportConfig}
               >
                 <motion.p
                   className="text-sm sm:text-base text-[#AFAFAF]"
                   style={{ lineHeight: '1.7' }}
-                  variants={itemVariants}
+                  variants={paragraphMotion}
                   transition={{ duration: 0.5 }}
                 >
                   Tetra collapses the fragmented trading stack into a single execution surface
@@ -89,10 +92,10 @@ export default function Ethos({
 
             <motion.div
               className="flex justify-center lg:justify-start lg:pt-16"
-              variants={buttonVariants}
+              variants={ctaMotion}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.1 }}
+              viewport={viewportConfig}
             >
               <JoinWaitlistButton onJoinWaitlist={onJoinWaitlist} />
             </motion.div>
@@ -101,4 +104,7 @@ export default function Ethos({
       </div>
     </div>
   );
-}
+};
+
+export default VisionSection;
+

@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { type FC } from "react";
 
-export default function Features() {
-  const containerVariants = {
+const FeatureGrid: FC = () => {
+  const wrapperMotion = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -14,7 +15,7 @@ export default function Features() {
     },
   };
 
-  const itemVariants = {
+  const elementMotion = {
     hidden: {
       opacity: 0,
       y: 50,
@@ -25,7 +26,7 @@ export default function Features() {
     },
   };
 
-  const cardVariants = {
+  const featureCardMotion = {
     hidden: {
       opacity: 0,
       y: 60,
@@ -218,28 +219,32 @@ export default function Features() {
     },
   ];
 
+  const viewportOptions = { once: true, amount: 0.1 };
+  const elementTransition = { duration: 0.1, ease: "easeOut" as const };
+  const cardAnimationConfig = { duration: 0.2, ease: "easeOut" as const };
+
   return (
     <div className="relative w-full py-8 sm:py-12 md:py-16">
       <div className="max-w-6xl mx-auto">
         <motion.div
           className="text-center mb-12 sm:mb-16 md:mb-20"
-          variants={containerVariants}
+          variants={wrapperMotion}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={viewportOptions}
         >
           <motion.h2
             className="text-lg sm:text-xl font-bold text-[#98C500] mb-3 sm:mb-4"
-            variants={itemVariants}
-            transition={{ duration: 0.1, ease: "easeOut" }}
+            variants={elementMotion}
+            transition={elementTransition}
           >
             Why Tetra
           </motion.h2>
           <motion.p
             style={{ lineHeight: '1.7' }}
             className="text-sm sm:text-base text-[#AFAFAF] max-w-2xl mx-auto"
-            variants={itemVariants}
-            transition={{ duration: 0.1, ease: "easeOut" }}
+            variants={elementMotion}
+            transition={elementTransition}
           >
             Unified analytics, automation, and execution
             <br />
@@ -249,28 +254,28 @@ export default function Features() {
 
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
-          variants={containerVariants}
+          variants={wrapperMotion}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={viewportOptions}
         >
-          {features.map((feature, index) => (
+          {features.map((featureItem, idx) => (
             <motion.div
-              key={index}
+              key={idx}
               className="flex flex-col"
-              variants={cardVariants}
-              transition={{ duration: 0.2, ease: "easeOut" }}
+              variants={featureCardMotion}
+              transition={cardAnimationConfig}
             >
               <div className="flex flex-row items-center gap-2 mb-3 sm:mb-4">
-                <div className="text-[#98C500]">{feature.icon}</div>
+                <div className="text-[#98C500]">{featureItem.icon}</div>
                 <h3 className="text-sm sm:text-base text-white">
-                  {feature.title}
+                  {featureItem.title}
                 </h3>
               </div>
 
               <div className="p-4 sm:p-6 rounded-lg bg-[#080807] border border-[#303030] h-[210px] sm:h-[200px] flex items-center">
                 <p className="text-[#AFAFAF] text-xs sm:text-sm leading-relaxed text-left">
-                  {feature.description}
+                  {featureItem.description}
                 </p>
               </div>
             </motion.div>
@@ -279,4 +284,7 @@ export default function Features() {
       </div>
     </div>
   );
-}
+};
+
+export default FeatureGrid;
+
