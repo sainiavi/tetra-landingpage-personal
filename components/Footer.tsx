@@ -134,18 +134,15 @@ const Footer: FC = () => {
         />
         <div className="relative z-10 max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-start gap-6 sm:gap-0">
           <div className="flex flex-col mb-0 sm:mb-0">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0">
-                <img
-                  src="/icon.svg"
-                  alt="Tetra Logo"
-                  className="w-5 h-5 sm:w-6 sm:h-6"
-                />
-              </div>
-              <span className="text-white font-bold text-lg sm:text-xl">
-                Tetra
-              </span>
+            <div className="flex items-center gap-0">
+            <div className="w-20 h-4 flex-shrink-0 mb-5">
+              <img
+                src="/og-image.png"
+                alt="Tetra Logo"
+                className="w-18 h-4 sm:w-20 sm:h-5 px-0"
+              />
             </div>
+          </div>
             <p className="text-[#8C946D] text-xs sm:text-sm max-w-xs sm:max-w-none">
               <TypingEffect text="Redefining how global markets trade on-chain" />
             </p>

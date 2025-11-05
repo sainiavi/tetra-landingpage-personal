@@ -65,7 +65,7 @@ const VisionSection: FC<VisionSectionProps> = ({ onJoinWaitlist }) => {
                 whileInView="visible"
                 viewport={viewportConfig}
               >
-                The Tetra Vision
+                The TETRA Vision
               </motion.h2>
 
               <motion.div
