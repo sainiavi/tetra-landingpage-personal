@@ -42,7 +42,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className + ' ' + kodeMono.variable}>
+      <body className={inter.className + ' ' + kodeMono.variable + 'bg-black'}>
         {children}
         <ToastContainer
           position="top-right"
