@@ -16,7 +16,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background-color: rgb(var(--background-end-rgb));
+  background-color: black;
 }
 
 /* Light Beam Background Animations */
