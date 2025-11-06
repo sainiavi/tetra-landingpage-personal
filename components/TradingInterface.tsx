@@ -29,7 +29,7 @@ const TradingInterface: FC = () => {
       if (fullyDisplayedRef.current && elementBounds.top < 0) {
         setPerspectiveAngle(0);
       } else {
-        const computedAngle = 30 * (1 - displayRatio);
+        const computedAngle = 90 * (1 - displayRatio);
         setPerspectiveAngle(computedAngle);
       }
     };
@@ -54,8 +54,9 @@ const TradingInterface: FC = () => {
   };
 
   const transformStyle = {
-    transform: `perspective(700px) rotateX(${perspectiveAngle}deg)`,
+    transform: `perspective(1200px) rotateX(${perspectiveAngle}deg)`,
     transformOrigin: "center center",
+    transformStyle: "preserve-3d" as any,
   };
 
   const imageShadowStyle = {
@@ -81,12 +82,12 @@ const TradingInterface: FC = () => {
         >
           <div className="relative">
             <Image
-              src="/tradeChart.svg"
+              src="/TetraProduct.png"
               alt="Trading Platform Interface"
               width={700}
               height={700}
-              className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-none rounded-xl shadow-2xl border border-gray-700/50"
-              style={imageShadowStyle}
+              className="max-w-[720px] rounded-xl shadow-2xl border-3 border-[#7B9C09]"
+              style={{ ...imageShadowStyle, width: "min(90vw, 720px)", height: "auto" }}
               priority
             />
             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-green-500/5 via-transparent to-transparent pointer-events-none" />

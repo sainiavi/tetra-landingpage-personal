@@ -238,7 +238,7 @@ const FeatureGrid: FC = () => {
             variants={elementMotion}
             transition={elementTransition}
           >
-            Why Tetra
+            Why TETRA?
           </motion.h2>
           <motion.p
             style={{ lineHeight: '1.7' }}

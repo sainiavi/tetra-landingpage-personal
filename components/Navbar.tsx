@@ -15,16 +15,13 @@ const Navbar: FC<NavbarProps> = ({ className = "" }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="flex justify-between items-center h-14 sm:h-16">
           <div className="flex items-center gap-0">
-            <div className="w-6 h-6 flex-shrink-0">
+            <div className="w-20 h-4 flex-shrink-0">
               <img
-                src="/icon.svg"
+                src="/og-image.png"
                 alt="Tetra Logo"
-                className="w-8 h-4 sm:w-10 sm:h-5 px-0"
+                className="w-18 h-4 sm:w-20 sm:h-5 px-0"
               />
             </div>
-            <span className="text-white font-semibold text-lg sm:text-xl px-0">
-              Tetra
-            </span>
           </div>
 
           <div className="flex items-center gap-2">
