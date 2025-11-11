@@ -14,15 +14,17 @@ const kodeMono = Kode_Mono({
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Tetra',
+  title: 'Tetra - Onchaintradingterminal for global markets',
   description: 'Redefining how global markets trade on-chain',
   openGraph: {
-    title: "Tetra",
+    title: "Tetra - Onchaintradingterminal for global markets",
     description: "Redefining how global markets trade on-chain",
     url: "https://www.tetraexchange.one/",
+    siteName: "Tetra",
+    type: "website",
     images: [
       {
-        url: "https://www.tetraexchange.one/og-image.png",
+        url: "https://www.tetraexchange.one/og-twitter.jpg",
         width: 1200,
         height: 630,
         alt: "Tetra Preview"
@@ -30,8 +32,10 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    images: ["https://www.tetraexchange.one/og-image.png"],
+    card: "summary_large_image", 
+    title: "Tetra - Onchain trading terminal for global markets",
+    description: "Redefining how global markets trade on-chain.",
+    images: ["https://www.tetraexchange.one/og-twitter.jpg"],
   },
 }
 
